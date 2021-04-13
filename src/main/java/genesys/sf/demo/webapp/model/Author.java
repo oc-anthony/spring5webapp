@@ -1,9 +1,8 @@
 package genesys.sf.demo.webapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Author {
@@ -13,6 +12,9 @@ public class Author {
     private Long id;
     private String firstname;
     private String lastname;
+
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books = new HashSet<>();
 
     public Author() {
     }
@@ -44,5 +46,13 @@ public class Author {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 }
